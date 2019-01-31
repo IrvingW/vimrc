@@ -39,6 +39,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'ashfinal/vim-colors-violet'
 Plugin 'Shougo/denite.nvim'
 Plugin 'chemzqm/denite-git'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 call vundle#end()
 
 let g:mapleader = ";"
@@ -84,11 +86,18 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules'] "ignore files in NERDTree
 " 不显示项目树上额外的信息，例如帮助、提示什么的
 " let NERDTreeMinimalUI=1
+let NERDTreeWinSize=50
 
 " fold code
-set foldmethod=indent
-" au BufWinLeave * silent mkview  " 保存文件的折叠状态
-" au BufRead * silent loadview    " 恢复文件的折叠状态
+set foldenable              " 开始折叠
+set foldmethod=syntax       " 设置语法折叠
+set foldcolumn=0            " 设置折叠区域的宽度
+setlocal foldlevel=1        " 设置折叠层数为
+set foldlevelstart=99       " 打开文件是默认不折叠代码
+
+"set foldclose=all          " 设置为自动关闭折叠                
+au BufWinLeave * silent mkview  " 保存文件的折叠状态
+au BufRead * silent loadview    " 恢复文件的折叠状态
 nnoremap <space> za             " 用空格来切换折叠状态
 nnoremap <C-z> zm               " 打开所有折叠
 nnoremap <C-x> zr               " 关闭所有折叠
@@ -135,3 +144,6 @@ map <C-l> :Limelight!!<CR>
 
 " colorscheme monokai 
 colorscheme yowish
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<leader>u"
